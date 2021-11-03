@@ -7,8 +7,10 @@ from tkinter import messagebox
 #  word_to_guess = orange (a string)
 #  return          ______ (a string with 6 underscores)
 def setup_new_word(word_to_guess):
-
-    return str()
+    new=''
+    for i in range(len(word_to_guess)):
+        new+='_ '
+    return new
 
 # TODO 2) Complete the function to return whether the letter is in
 #  the word to guess
@@ -16,7 +18,8 @@ def setup_new_word(word_to_guess):
 #  letter = o (a string)
 #  return True
 def check_letter_in_word(word_to_guess, letter):
-
+    if letter in word_to_guess:
+        return True
     return False
 
 # TODO 3) Complete the function to return the current guess with the
@@ -27,8 +30,10 @@ def check_letter_in_word(word_to_guess, letter):
 #       return o__nge (a string)
 #  Remember that strings can't be changed directly!
 def replace_letter_in_word(word_to_guess, current_guess, letter):
-
-    return str()
+    for i in range(len(word_to_guess)):
+        if word_to_guess[i]==letter:
+            current_guess=current_guess[0:i]+letter+current_guess[i+1:-1]
+    return current_guess
 
 # ====================== DO NOT EDIT THE CODE BELOW ===========================
 
@@ -55,7 +60,7 @@ class Hangman(tk.Tk):
         self.get_new_random_word()
 
         # UNCOMMENT TO SHOW HIDDEN WORD
-        #print(self.random_word)
+        print(self.random_word)
 
         # Setup label to display keys pressed by the user
         self.label = tk.Label(self, bg='light grey', textvariable=self.entered_text)
@@ -126,7 +131,7 @@ class Hangman(tk.Tk):
         # Only need to be read once
         if Hangman.dict_word_list is None:
             file_handle = None
-            word_file = "dictionary.txt"
+            word_file = "C:\\Users\\sanam\\Programming\\Pyflakes\\Level1-Module0\\_03_word_games\\dictionary.txt"
 
             # 'with' statement will automatically close the file afterwards
             with open(word_file) as file_handle:
